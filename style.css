@@ -1,0 +1,174 @@
+/* style.css: Định dạng giao diện người dùng */
+
+/* Tiêu đề */
+h1 {
+  font-family: "Poppins", sans-serif; /* Đặt font chữ */
+  font-weight: 600; /* Độ đậm của chữ */
+  margin-top: 20px; /* Khoảng cách trên */
+  margin-bottom: 40px; /* Khoảng cách dưới */
+}
+
+/* Đường dẫn */
+a {
+  color: black; /* Màu chữ */
+}
+
+/* Thanh điều hướng */
+.navbar-nav {
+  font-size: 20px; /* Kích thước chữ */
+}
+#favorite-count {
+  font-size: 1rem; /* Kích thước chữ cho số lượng yêu thích */
+}
+
+/* Input tìm kiếm */
+.no-border {
+  border: none; /* Loại bỏ viền */
+  outline: none; /* Loại bỏ viền khi focus */
+  box-shadow: none; /* Loại bỏ bóng mặc định */
+}
+.nav-search-form {
+  border: solid rgba(0, 0, 0, 0.251); /* Viền nhạt */
+  background-color: white; /* Màu nền trắng */
+  border-radius: 25px; /* Bo góc */
+  padding: 5px; /* Khoảng cách bên trong */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Bóng nhẹ */
+  width: 400px; /* Độ rộng */
+}
+
+/* Nút bấm */
+#btn-load-more,
+#btn-filter,
+#btn-clear {
+  border: 2px solid; /* Viền */
+  border-radius: 25px; /* Bo góc */
+  padding: 10px 20px; /* Khoảng cách */
+  transition: all 0.3s ease; /* Hiệu ứng chuyển đổi */
+}
+#btn-load-more:hover,
+#btn-filter:hover {
+  border-color: #e2b308; /* Đổi màu viền khi hover */
+  background-color: transparent; /* Màu nền trong suốt */
+  color: #e2b308; /* Màu chữ */
+}
+
+/* Sidebar bộ lọc */
+.filter-sidebar {
+  border-right: 1px solid #ddd; /* Viền phải */
+  padding-right: 15px; /* Khoảng cách bên phải */
+}
+.filter-sidebar select {
+  margin-bottom: 15px; /* Khoảng cách dưới mỗi lựa chọn */
+}
+.filter-sidebar.pe-none {
+  background-color: #e2b308; /* Màu nền khi bị khóa */
+}
+
+/* Biểu đồ */
+#areaChart {
+  width: 800px; /* Độ rộng */
+}
+
+/* Danh sách món ăn */
+.recipe img {
+  width: 100%; /* Chiều rộng bằng 100% vùng chứa */
+  height: auto; /* Chiều cao tự động */
+  border-radius: 10px; /* Bo góc */
+}
+.recipe h3 {
+  font-size: 1.25rem; /* Kích thước chữ */
+  font-weight: bold; /* Chữ đậm */
+  margin: 10px 0 5px; /* Khoảng cách */
+}
+
+.recipe-thumb-wrapper {
+  position: relative; /* Định vị tương đối */
+}
+.favorite-icon {
+  position: absolute; /* Định vị tuyệt đối */
+  top: 0px; /* Căn trên cùng */
+  right: 0px; /* Căn phải */
+  padding: 5px; /* Khoảng cách bên trong */
+  cursor: pointer; /* Con trỏ dạng tay chỉ */
+  background: rgba(0, 0, 0, 0.5); /* Nền mờ */
+  border-radius: 10px; /* Bo góc */
+}
+.favorite-icon > svg {
+  pointer-events: none; /* Không kích hoạt sự kiện */
+}
+
+/* Thông báo Toast */
+#toast-wrapper {
+  position: fixed; /* Định vị cố định */
+  top: 10px; /* Căn cách trên */
+  right: 20px; /* Căn cách phải */
+}
+.custom-toast {
+  background-color: #e2b308; /* Màu nền */
+  color: black; /* Màu chữ */
+  text-align: center; /* Căn giữa chữ */
+  border-radius: 8px; /* Bo góc */
+  width: 200px; /* Độ rộng */
+  padding: 5px; /* Khoảng cách bên trong */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); /* Bóng nhẹ */
+  opacity: 0; /* Ban đầu ẩn */
+  visibility: hidden; /* Không hiển thị */
+  transform: translateY(-100%); /* Dịch chuyển lên */
+  transition: all 0.3s ease-in-out; /* Hiệu ứng chuyển đổi */
+  margin: 1rem 0; /* Khoảng cách trên dưới */
+}
+.custom-toast.show {
+  opacity: 1; /* Hiển thị */
+  visibility: visible; /* Hiển thị */
+  transform: translateX(0); /* Dịch chuyển về vị trí ban đầu */
+}
+
+/* ----Detail.html----- */
+
+table {
+  width: 50px;
+  table-layout: fixed;
+}
+.table th,
+.table td {
+  text-align: left;
+}
+div.ingredient-block {
+  margin-left: 20px;
+  width: 500px;
+}
+div.ingredient-info {
+  margin-right: 20px;
+}
+.meal-detail h1 {
+  margin: 30px 0;
+}
+.meal-detail h4 {
+  font-size: 18px;
+}
+.meal-detail img {
+  margin: 20px 0;
+}
+.suggest-related-recipe {
+  margin: 48px;
+}
+.suggest-related-recipe h2 {
+  margin-bottom: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #search-section {
+    flex-direction: column; /* Căn cột */
+    align-items: center; /* Căn giữa */
+  }
+  .recipe {
+    margin-top: 20px; /* Khoảng cách trên */
+  }
+}
+@media (max-width: 576px) {
+  #recipe-list {
+    display: grid; /* Hiển thị dạng lưới */
+    grid-template-columns: repeat(2, 1fr); /* Hai cột */
+  }
+}
