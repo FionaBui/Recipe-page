@@ -3,7 +3,6 @@
 // Đường dẫn API cơ sở
 const BASE_CITY_URL_API = "https://avancera.app/cities/"; // API endpoint để thao tác dữ liệu thành phố
 
-// Tham chiếu đến các phần tử HTML
 const elCityForm = document.getElementById("city-form");
 const elCityNameInput = document.getElementById("city-name");
 const elCityPopulationInput = document.getElementById("city-population");
@@ -12,6 +11,70 @@ const elBtnSave = document.getElementById("btn-save");
 const elBtnCancel = document.getElementById("btn-cancel");
 // Biến lưu trữ trạng thái chỉnh sửa
 let idEdit = null; // Lưu ID của thành phố đang chỉnh sửa (null khi tạo mới)
+
+function getCategoryData(meals) {
+  const categoryCount = {};
+  meals.forEach((el) => {
+    const key = el.strCategory;
+    if (categoryCount[key]) {
+      categoryCount[key]++;
+    } else {
+      categoryCount[key] = 1;
+    }
+  });
+  return categoryCount;
+}
+
+function displayCategoryChart(categoryData) {
+  const elCategoryChart = document.getElementById("areaChart");
+  const xValues = Object.keys(categoryData);
+  const yValues = Object.values(categoryData);
+
+  new Chart(elCategoryChart, {
+    type: "pie",
+    data: {
+      labels: xValues,
+      datasets: [
+        {
+          backgroundColor: [
+            "#FF6384",
+            "#36A2EB",
+            "#FFCE56",
+            "#4BC0C0",
+            "#9966FF",
+            "#FF9F40",
+          ],
+          data: yValues,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: "top",
+        },
+        title: {
+          display: true,
+          text: "Food ratio by category",
+        },
+      },
+    },
+  });
+}
+
+async function fetchMealsForChart() {
+  const response = await fetch(`${BASE_URL_API}search.php?s=`); // Lấy tất cả món ăn
+  const data = await response.json();
+  const categoryData = getCategoryData(data.meals); // Chuẩn bị dữ liệu
+  displayCategoryChart(categoryData); // Hiển thị biểu đồ
+}
+
+fetchMealsForChart();
+
+document.addEventListener("DOMContentLoaded", () => {
+  fetchMealsForChart();
+});
 
 // Hàm lấy danh sách các thành phố và hiển thị chúng
 async function fetchCities() {

@@ -39,12 +39,25 @@ fetch(`${BASE_URL_API}lookup.php?i=${id}`)
 
       const html = `
       <div class="meal-detail m-5">
-        <h1>${element.strMeal}</h1>
+        <div class="d-flex align-items-center">
+          <h1>${element.strMeal}</h1>
+          <span class="favorite-icon m-3" data-id="${element.idMeal}">
+            ${
+              FAVORITE_LIST_RECIPES.includes(element.idMeal)
+                ? LIKED_HEART
+                : UNLIKED_HEART
+            }
+          </span>
+        </div>
         <div class="d-flex justify-content-between">
           <div class="meal-info">
-            <h4 class="fst-italic">Category: <a href="index.html?c=${element.strCategory}">${element.strCategory}</a></h4>
+            <h4 class="fst-italic">Category: <a href="index.html?c=${
+              element.strCategory
+            }">${element.strCategory}</a></h4>
             <h4 class="fst-italic mt-2">Cuisine: ${element.strArea}</h4>
-            <img src="${element.strMealThumb}" alt="${element.strMeal}" width="500px" class="img-fluid rounded" />
+            <img src="${element.strMealThumb}" alt="${
+        element.strMeal
+      }" width="500px" class="img-fluid rounded" />
           </div>
           <div class="ingredient-block">
             <h2>Ingredients:</h2>
@@ -60,6 +73,32 @@ fetch(`${BASE_URL_API}lookup.php?i=${id}`)
       displayRelatedRecipes(currentCategory, element.idMeal); // Gọi hàm hiển thị món ăn liên quan
     }
   });
+
+// EVent Favorite
+elMealDetail.addEventListener("click", (e) => {
+  const id = e.target.dataset.id; // Lấy ID món ăn
+  const iconElement = e.target; // Biểu tượng trái tim được click
+
+  // Kiểm tra trạng thái yêu thích
+  if (FAVORITE_LIST_RECIPES.includes(id)) {
+    // Nếu đã có trong danh sách, xóa khỏi danh sách
+    FAVORITE_LIST_RECIPES = FAVORITE_LIST_RECIPES.filter(
+      (itemId) => itemId !== id
+    );
+    iconElement.innerHTML = UNLIKED_HEART; // Đổi biểu tượng thành chưa thích
+  } else {
+    // Nếu chưa có, thêm vào danh sách
+    FAVORITE_LIST_RECIPES.push(id);
+    iconElement.innerHTML = LIKED_HEART; // Đổi biểu tượng thành đã thích
+  }
+
+  // Cập nhật danh sách yêu thích vào localStorage
+  localStorage.setItem(
+    "FAVORITE_LIST_RECIPES",
+    JSON.stringify(FAVORITE_LIST_RECIPES)
+  );
+  elCount.textContent = FAVORITE_LIST_RECIPES.length;
+});
 
 // Skapa en funktion för att visa en lista på upp till 4 relaterade maträtter baserat på kategorin för den aktuella maträtten.
 async function displayRelatedRecipes(category, currentRecipeId) {

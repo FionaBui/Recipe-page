@@ -244,7 +244,7 @@ async function fetchAllMeals() {
   } else {
     displayMeals(allMeals);
   }
-  const categoryData = getCategoryData(allMeals); // Hämtar kategoridata för diagrammet
+
   displayCategoryChart(categoryData);
 }
 
@@ -285,59 +285,6 @@ async function renderFilter() {
       });
       elOptionIngredients.innerHTML = mealIngredients;
     });
-}
-// Funktionen för att räkna antalet recept per kategori
-function getCategoryData(meals) {
-  const categoryCount = {};
-  meals.forEach((el) => {
-    const key = el.strCategory;
-    // Lấy tên area của món ăn
-    if (categoryCount[key]) {
-      categoryCount[key]++; // Ökar räkningen om kategorin redan finns
-    } else {
-      categoryCount[key] = 1;
-      // Skapar ny kategori med räkning 1
-    }
-  });
-  return categoryCount;
-}
-
-// Funktionen för att visa diagrammet
-function displayCategoryChart(categoryData) {
-  const elCategoryChart = document.getElementById("areaChart");
-  const xValues = Object.keys(categoryData);
-  const yValues = Object.values(categoryData);
-
-  new Chart(elCategoryChart, {
-    type: "pie",
-    data: {
-      datasets: [
-        {
-          backgroundColor: [
-            "#FF6384",
-            "#36A2EB",
-            "#FFCE56",
-            "#4BC0C0",
-            "#9966FF",
-            "#FF9F40",
-          ],
-          data: yValues,
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: {
-          position: "top",
-        },
-        title: {
-          display: true,
-          text: "Food ratio by category",
-        },
-      },
-    },
-  });
 }
 
 async function init() {

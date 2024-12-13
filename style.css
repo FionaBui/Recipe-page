@@ -84,7 +84,7 @@ a {
 .recipe-thumb-wrapper {
   position: relative; /* Định vị tương đối */
 }
-.favorite-icon {
+.recipe-thumb-wrapper .favorite-icon {
   position: absolute; /* Định vị tuyệt đối */
   top: 0px; /* Căn trên cùng */
   right: 0px; /* Căn phải */
@@ -124,7 +124,6 @@ a {
 }
 
 /* ----Detail.html----- */
-
 table {
   width: 50px;
   table-layout: fixed;

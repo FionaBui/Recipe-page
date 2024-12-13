@@ -15,6 +15,7 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="style.css" />
     <title>Sweden City Dashboard</title>
   </head>
@@ -109,6 +110,11 @@
       </nav>
     </header>
     <main>
+      <div class="chart-container">
+        <h2>Food Category Distribution</h2>
+        <canvas id="areaChart" width="400" height="400"></canvas>
+      </div>
+
       <div class="container mt-5">
         <h1 class="text-center">Sweden City Dashboard</h1>
 
@@ -150,6 +156,7 @@
         </table>
       </div>
     </main>
+    <script src="js/define.js"></script>
     <script src="js/cities.js"></script>
   </body>
 </html>
