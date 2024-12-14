@@ -12,6 +12,10 @@ const elBtnCancel = document.getElementById("btn-cancel");
 // Biến lưu trữ trạng thái chỉnh sửa
 let idEdit = null; // Lưu ID của thành phố đang chỉnh sửa (null khi tạo mới)
 
+document.addEventListener("DOMContentLoaded", () => {
+  fetchMealsForChart();
+});
+
 function getCategoryData(meals) {
   const categoryCount = {};
   meals.forEach((el) => {
@@ -25,12 +29,16 @@ function getCategoryData(meals) {
   return categoryCount;
 }
 
+let currentChart = null;
 function displayCategoryChart(categoryData) {
   const elCategoryChart = document.getElementById("areaChart");
+  if (currentChart) {
+    currentChart.destroy();
+  }
   const xValues = Object.keys(categoryData);
   const yValues = Object.values(categoryData);
 
-  new Chart(elCategoryChart, {
+  currentChart = new Chart(elCategoryChart, {
     type: "pie",
     data: {
       labels: xValues,
@@ -43,6 +51,10 @@ function displayCategoryChart(categoryData) {
             "#4BC0C0",
             "#9966FF",
             "#FF9F40",
+            "#B093CC",
+            "#f59ca9",
+            "#89a1ef",
+            "#b5c99a",
           ],
           data: yValues,
         },
@@ -56,7 +68,6 @@ function displayCategoryChart(categoryData) {
         },
         title: {
           display: true,
-          text: "Food ratio by category",
         },
       },
     },
@@ -71,10 +82,6 @@ async function fetchMealsForChart() {
 }
 
 fetchMealsForChart();
-
-document.addEventListener("DOMContentLoaded", () => {
-  fetchMealsForChart();
-});
 
 // Hàm lấy danh sách các thành phố và hiển thị chúng
 async function fetchCities() {
@@ -96,7 +103,7 @@ function displayCityList(data) {
       <td>${city.name}</td>
       <td>${city.population}</td>
       <td>
-        <button data-id="${city.id}" class="edit-btn btn btn-info">Edit</button>
+        <button data-id="${city.id}" class="edit-btn btn btn-secondary">Edit</button>
         <button data-id="${city.id}" class="delete-btn btn btn-danger">Delete</button>
       </td>
     `;
@@ -187,19 +194,3 @@ elBtnCancel.addEventListener("click", () => {
   elCityForm.reset();
   elBtnSave.textContent = "Save";
 });
-
-/*
-fetchCities
-fetchCity(id)
-deleteCity(id)
-createCity(data)
-updateCity(data)
-*/
-
-// (4). Update: show old info + update info
-//     3.1. Show old info: add event click button edit -> event delegate
-//         - Get id -> dataset.id
-//         - call api GET DETAIL: /cities/{id} -> object
-//         - show info to inputs on FORM
-
-//     3.2. Update Info: same event (3)

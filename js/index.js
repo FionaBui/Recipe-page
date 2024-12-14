@@ -12,7 +12,6 @@ const elOptionIngredients = document.getElementById(
   "dataListOptionsIngredients"
 );
 const elFilterSidebar = document.querySelector(".filter-sidebar");
-
 // Ändra sidans titel
 elPageTitle.textContent = "Cook & Share - Homepage";
 
@@ -244,8 +243,6 @@ async function fetchAllMeals() {
   } else {
     displayMeals(allMeals);
   }
-
-  displayCategoryChart(categoryData);
 }
 
 // Funktionen för att rendera filtermenyn
