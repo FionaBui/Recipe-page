@@ -92,10 +92,12 @@ elMealDetail.addEventListener("click", (e) => {
         (itemId) => itemId !== id
       );
       iconElement.innerHTML = UNLIKED_HEART; // Đổi biểu tượng thành chưa thích
+      showToast("Removed from favorites!");
     } else {
       // Nếu chưa có, thêm vào danh sách
       FAVORITE_LIST_RECIPES.push(id);
       iconElement.innerHTML = LIKED_HEART; // Đổi biểu tượng thành đã thích
+      showToast("Added to favorites!");
     }
 
     // Cập nhật danh sách yêu thích vào localStorage
