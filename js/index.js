@@ -228,7 +228,6 @@ async function fetchAllMeals() {
         }
       });
   }
-  console.log(allMeals);
   elFilterSidebar.classList.remove("pe-none"); // Aktiverar filterpanelen när laddningen är klar
   allMealsRender = [...allMeals]; // Kopierar hela listan för renderering
   // Kontrollera om sökning eller filter har använts tidigare
